@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-langchain = "^0.0.258"
+langchain = "0.0.301"
 streamlit = "^1.25.0"
 pandas = "^2.0.3"
 python-dotenv = "^1.0.0"

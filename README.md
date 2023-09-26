@@ -18,3 +18,7 @@ Ask your data what you wanna know!
 
 2. `poetry install` (Using Poetry (version 1.4.2))
 3. `poetry run streamlit run app.py`
+
+# dependency management
+- Using poetry mainly
+- `requirements.txt` is only for Hugginface, generted using `poetry export --without-hashes --format=requirements.txt > requirements.txt`

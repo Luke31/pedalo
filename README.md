@@ -1,4 +1,16 @@
-# PEDALO - Productive Exploratory Data Analysis using Langchain interrOgation
+---
+title: Pedalo
+emoji: 👁
+colorFrom: green
+colorTo: pink
+sdk: streamlit
+sdk_version: 1.25.0
+app_file: app.py
+pinned: false
+license: mit
+---
+
+# PEDALO
 
 Ask your data what you wanna know!
 
@@ -18,17 +30,3 @@ See https://huggingface.co/spaces/Luke31/pedalo
 ## Dependency management
 - Using poetry mainly
 - `requirements.txt` is only for Hugginface
-
-## Huggingface config
-
----
-title: Pedalo
-emoji: 👁
-colorFrom: green
-colorTo: pink
-sdk: streamlit
-sdk_version: 1.25.0
-app_file: app.py
-pinned: false
-license: mit
----

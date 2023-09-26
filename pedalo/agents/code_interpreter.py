@@ -14,13 +14,9 @@ model_grand_agent = "gpt-3.5-turbo"
 def run(
     prompt: str, df: DataFrame, st_callback: StreamlitCallbackHandler, model="gpt-4"
 ) -> str:
-    # python_agent_executor = create_python_agent(
-    #     llm=ChatOpenAI(temperature=0, model=model_python_agent_executor),
-    #     tool=PythonREPLTool(),
-    #     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    #     verbose=True,
-    # )
-
+    agent_executor_kwargs = {
+        "handle_parsing_errors": True,
+    }
     pandas_agent = create_pandas_dataframe_agent(
         llm=ChatOpenAI(
             temperature=0,
@@ -29,9 +25,12 @@ def run(
         ),
         df=df,
         verbose=True,
-        agent_type=AgentType.OPENAI_FUNCTIONS, #AgentType.OPENAI_FUNCTIONS, #
+        agent_type=AgentType.OPENAI_FUNCTIONS,
+        agent_executor_kwargs=agent_executor_kwargs,
+        max_iterations=5
     )
 
+    # currently disabled, agent that can call other agent
     grand_agent = initialize_agent(
         tools=[
     #         Tool(
@@ -53,7 +52,5 @@ def run(
         # agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         verbose=True,
     )
-    cmd = f"""in provided pandas dataframe, answer the provided question.
-     \n{prompt}"""
-    response = pandas_agent.run(cmd, callbacks=[st_callback])
+    response = pandas_agent.run(prompt, callbacks=[st_callback])
     return response

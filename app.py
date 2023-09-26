@@ -4,19 +4,24 @@ from pandas import DataFrame
 
 from pedalo.main import run
 import pandas as pd
+import os
+import openai
 
 # st.set_page_config(layout="wide")
 st.title("PEDALO - Productive Exploratory Data Analysis using Langchain interrOgation")
 st.write("Ask your data what you wanna know!")
+if "OPENAI_API_KEY" in os.environ:
+    openai_api_key = os.environ.get("OPENAI_API_KEY")
+else:
+    openai_api_key = st.sidebar.text_input("OPENAI_API_KEY")
 model = st.sidebar.radio("Which model do you wanna use?", ("gpt-4", "gpt-3.5-turbo"), index=1)
-
 uploaded_file = st.sidebar.file_uploader("Choose a file", type=["csv"])
 
 
 
 def run_df_analysis(prompt:str, df: DataFrame):
     st_callback = StreamlitCallbackHandler(st.container())
-    response = run(prompt, df, st_callback, model)
+    response = run(prompt, df, st_callback, openai_api_key, model)
     st.write(response)
 
 

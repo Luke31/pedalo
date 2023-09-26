@@ -13,9 +13,9 @@ openai.api_key = api_key
 
 
 def run(
-    prompt: str, df: DataFrame, st_callback: StreamlitCallbackHandler, model="gpt-4"
+    prompt: str, df: DataFrame, st_callback: StreamlitCallbackHandler, openai_api_key: str, model="gpt-4"
 ):
-    result = code_interpreter.run(prompt, df, st_callback, model)
+    result = code_interpreter.run(prompt, df, st_callback, openai_api_key, model)
     return result
 
 

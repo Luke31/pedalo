@@ -12,7 +12,7 @@ model_grand_agent = "gpt-3.5-turbo"
 
 
 def run(
-    prompt: str, df: DataFrame, st_callback: StreamlitCallbackHandler, model="gpt-4"
+    prompt: str, df: DataFrame, st_callback: StreamlitCallbackHandler, openai_api_key:str, model="gpt-4"
 ) -> str:
     agent_executor_kwargs = {
         "handle_parsing_errors": True,
@@ -22,6 +22,7 @@ def run(
             temperature=0,
             model=model_pandas_agent,
             streaming=True,
+            openai_api_key=openai_api_key
         ),
         df=df,
         verbose=True,
@@ -47,7 +48,7 @@ def run(
                                                takes as an input the entire question and returns the answer after running calculations""",
             ),
         ],
-        llm=ChatOpenAI(temperature=0, model=model_grand_agent, streaming=True),
+        llm=ChatOpenAI(temperature=0, model=model_grand_agent, streaming=True, openai_api_key=openai_api_key),
         agent_type=AgentType.OPENAI_FUNCTIONS,
         # agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         verbose=True,
